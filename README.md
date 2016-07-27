@@ -27,7 +27,8 @@ can be nested by using the name of a file as the element of a node, though
 you'll have to make multiple function calls to access the nested lists; none of 
 the functions will recursively traverse them.
 
-`# Example usage:
+```
+# Example usage:
 cd demo
 
 # Print the list.
@@ -65,4 +66,5 @@ printList $node1
 # Reset the example.
 rm node4
 printf "node1\n3" > list1
-cd ..`
+cd ..
+```
