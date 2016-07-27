@@ -80,6 +80,27 @@ function remove {
    echo $oldVal
 }
 
+# Removes an element at an index.
+# $1 - the head of the list
+# $2 - n
+function removeAtIdx {
+   if [ "$2" -eq "0" ]; then
+      remove $1
+   else
+      let prevIdx=$2-1
+      let size=$(tail -n 1 $1)-1
+      prev=$(getNode $1 $prevIdx)
+      cur=$(getNode $1 $2)
+      next=$(head -n 1 $cur)
+      oldVal=$(tail -n 1 $cur)
+
+      printf "%s\n%s" $next $(tail -n 1 $prev) > $prev
+      printf "%s\n%s" $(head -n 1 $1) $size > $1
+      rm $cur
+      echo $oldVal
+   fi
+}
+
 # Prints out an entire linked list of files (non-nested)
 # $1 - the current node
 function printList {
@@ -96,66 +117,55 @@ function printList {
 cd demo
 
 # Print the list.
-node1=$(head -n 1 list1)
 echo "Printing list..."
-printList $node1
+printList $(head -n 1 list1)
 
 # Add to the list.
 printf "\nAdding hello...\n"
 add "list1" "hello"
+printList $(head -n 1 list1)
 
-# Print the list.
-node1=$(head -n 1 list1)
-printList $node1
-
-# Add to the list.
 printf "\nAdding world...\n"
 add "list1" "world"
-
-# Print the list.
-node1=$(head -n 1 list1)
-printList $node1
+printList $(head -n 1 list1)
 
 # Get an element.
 printf "\nGetting the element at index 1...\n"
-get $node1 1
+get $(head -n 1 list1) 1
+
+# Get the name of a node.
+printf "\nGetting the name of the node at index 1...\n"
+getNode "list1" 1
 
 # Add an element at an index.
 printf "\nAdding 327 at index 2...\n"
 addAtIdx "list1" 2 327
+printList $(head -n 1 list1)
 
-# Print the list.
-node1=$(head -n 1 list1)
-printList $node1
-
-# Add an element at an index.
 printf "\nAdding 94 at index 0...\n"
 addAtIdx "list1" 0 94
+printList $(head -n 1 list1)
 
-# Print the list.
-node1=$(head -n 1 list1)
-printList $node1
-
-# Add an element at an index.
 printf "\nAdding 1138 at index 7...\n"
 addAtIdx "list1" 7 1138
-
-# Print the list.
-node1=$(head -n 1 list1)
-printList $node1
+printList $(head -n 1 list1)
 
 # Remove from the list.
 printf "\nRemoved %s...\n" $(remove "list1")
+printList $(head -n 1 list1)
 
-# Print the list.
-node1=$(head -n 1 list1)
-printList $node1
+# Remove from an index.
+printf "\nRemoved %s from index 1...\n" $(removeAtIdx "list1" 1)
+printList $(head -n 1 list1)
 
-# Reset the example.
-rm node4
-rm node5
-rm node6
-rm node8
-printf "node1\n3" > list1
-printf "none\n!" > node3
+printf "\nRemoved %s from index 5...\n" $(removeAtIdx "list1" 5)
+printList $(head -n 1 list1)
+
+printf "\nRemoved %s from index 0...\n" $(removeAtIdx "list1" 0)
+printList $(head -n 1 list1)
+
+# Reset the test.
+printf "\nRemoved %s...\n" $(remove "list1")
+printList $(head -n 1 list1)
+
 cd ..
