@@ -29,60 +29,24 @@ node, though you'll have to make multiple function calls to access the nested
 lists; none of the functions will recursively traverse them.
 
 ```
-# Example usage:
-cd demo
-
 # Print the list.
-echo "Printing list..."
 printList $(head -n 1 list1)
 
-# Add to the list.
-printf "\nAdding hello...\n"
-add "list1" "hello"
-printList $(head -n 1 list1)
-
-printf "\nAdding world...\n"
-add "list1" "world"
-printList $(head -n 1 list1)
-
-# Get an element.
-printf "\nGetting the element at index 1...\n"
+# Get an element at index 1.
 get $(head -n 1 list1) 1
 
-# Get the name of a node.
-printf "\nGetting the name of the node at index 1...\n"
+# Get the name of the node at index 1.
 getNode "list1" 1
 
-# Add an element at an index.
-printf "\nAdding 327 at index 2...\n"
+# Add to the beginning of the list.
+add "list1" "hello"
+
+# Add '327' at index 2.
 addAtIdx "list1" 2 327
-printList $(head -n 1 list1)
 
-printf "\nAdding 94 at index 0...\n"
-addAtIdx "list1" 0 94
-printList $(head -n 1 list1)
+# Remove from beginning of the list.
+remove "list1"
 
-printf "\nAdding 1138 at index 7...\n"
-addAtIdx "list1" 7 1138
-printList $(head -n 1 list1)
-
-# Remove from the list.
-printf "\nRemoved %s...\n" $(remove "list1")
-printList $(head -n 1 list1)
-
-# Remove from an index.
-printf "\nRemoved %s from index 1...\n" $(removeAtIdx "list1" 1)
-printList $(head -n 1 list1)
-
-printf "\nRemoved %s from index 5...\n" $(removeAtIdx "list1" 5)
-printList $(head -n 1 list1)
-
-printf "\nRemoved %s from index 0...\n" $(removeAtIdx "list1" 0)
-printList $(head -n 1 list1)
-
-# Reset the test.
-printf "\nRemoved %s...\n" $(remove "list1")
-printList $(head -n 1 list1)
-
-cd ..
+# Remove from index 1.
+removeAtIdx "list1" 1
 ```
