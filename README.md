@@ -1,4 +1,4 @@
-######The Backstory######
+###The Backstory###
 For a programming languages class, we had been developing an interpreter for a
 custom parenthesized language. For one assignment, we were randomly assigned a
 different language, typically completely different from our normal host
@@ -17,7 +17,7 @@ an expansion of the simple print and get functions I initially needed.
 
 
 
-######Use######
+###Use###
 Really, you want to use this?
 
 `./fl.sh` will run some example operations using the files included in the demo
