@@ -18,8 +18,6 @@ an expansion of the simple print and get functions I initially needed.
 
 
 ### Use ###
-Really, you want to use this?
-
 `./fl.sh` will run some example operations using the files included in the demo
 folder. BashFileList has functions for getting an element at an index, adding
 and removing from the head of the list, adding and removing from an index, 
